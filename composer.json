@@ -1,0 +1,30 @@
+{
+  "name": "dynamic/silverstripe-mailchimp",
+  "description": "A SilverStripe MailChimp integration module",
+  "authors": [
+    {
+      "name": "Dynamic",
+      "email": "dev@dynamicagency.com",
+      "homepage": "https://dynamicagency.com"
+    }
+  ],
+  "keywords": [
+    "silverstripe",
+    "mailchimp"
+  ],
+  "type": "silverstripe-module",
+  "license": "BSD-3-Clause",
+  "require": {
+    "silverstripe/cms": "^3.2",
+    "silverstripe/framework": "^3.2",
+    "thinkshout/mailchimp-api-php": "^v1.0"
+  },
+  "require-dev": {
+    "phpunit/PHPUnit": "^3.7"
+  },
+  "config": {
+    "process-timeout": 600
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

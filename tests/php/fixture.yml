@@ -1,0 +1,38 @@
+# Add your fixture data here.
+# https://docs.silverstripe.org/en/3.2/developer_guides/testing/fixtures/
+Permission:
+  admin:
+    Code: ADMIN
+  mailchimp-create:
+    Code: MailChimp_create
+  mailchimp-edit:
+    Code: MailChimp_edit
+  mailchimp-delete:
+    Code: MailChimp_delete
+Group:
+  admingroup:
+    Title: Admin
+    Code: admin
+    Permissions: =>Permission.admin
+  mailchimpgroup:
+    Title: MailChimp
+    Code: mailchimp
+    Permissions: =>Permission.mailchimp-create,=>Permission.mailchimp-edit,=>Permission.mailchimp-delete
+Member:
+  cancreate:
+    FirstName: Jon
+    Surname: Doe
+    email: jon.doe@example.com
+    Groups: =>Group.mailchimpgroup
+  cantcreate:
+    FirstName: Jane
+    Surname: Doe
+    email: jane.doe@example.com
+MailChimpTestSubscriberForm:
+  one:
+    Title: Form One
+    ListID: '012345'
+MailChimpTestPage:
+  one:
+    Title: Page One
+    MailChimpForm: =>MailChimpSubscriberForm.one
