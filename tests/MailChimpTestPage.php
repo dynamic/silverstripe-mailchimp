@@ -6,13 +6,6 @@
 class MailChimpTestPage extends Page implements TestOnly
 {
 
-    /**
-     * @var array
-     */
-    private static $extensions = [
-        'MailChimpSubscriberDataExtension',
-    ];
-
 }
 
 /**
