@@ -31,8 +31,8 @@ Member:
 MailChimpTestSubscriberForm:
   one:
     Title: Form One
-    ListID: '012345'
+    ListID: '76ac48ccc2'
 MailChimpTestPage:
   one:
     Title: Page One
-    MailChimpForm: =>MailChimpSubscriberForm.one
+    MailChimpForm: =>MailChimpTestSubscriberForm.one
