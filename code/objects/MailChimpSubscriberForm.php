@@ -11,6 +11,7 @@ use Mailchimp\MailchimpLists;
  * @property string $InterestCategoriesToShow
  * @property string $Success
  * @property string $Error
+ * @method Pages[]|HasManyList $Pages
  */
 class MailChimpSubscriberForm extends DataObject implements PermissionProvider
 {
@@ -179,7 +180,7 @@ class MailChimpSubscriberForm extends DataObject implements PermissionProvider
      */
     public function getMailChimp()
     {
-        if ( ! $this->mail_chimp) {
+        if (!$this->mail_chimp) {
             $this->setMailChimp();
         }
 
@@ -279,7 +280,7 @@ class MailChimpSubscriberForm extends DataObject implements PermissionProvider
     {
         $fieldTypeMap = $this->config()->get('field_type_map');
         if (array_key_exists($field->type, $fieldTypeMap)) {
-            if ( ! $isCategory) {
+            if (!$isCategory) {
                 $fieldType = $fieldTypeMap[$field->type];
                 $field     = $fieldType::create($field->tag)->setTitle($field->name);
             } else {
@@ -384,7 +385,7 @@ class MailChimpSubscriberForm extends DataObject implements PermissionProvider
             $member = Member::currentUser();
         }
 
-        return Permission::check('MailChimp_delete', 'any', $member) && ! $this->inUse();
+        return Permission::check('MailChimp_delete', 'any', $member) && !$this->inUse();
     }
 
     /**
