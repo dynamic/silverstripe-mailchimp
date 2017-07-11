@@ -32,6 +32,8 @@ MailChimpTestSubscriberForm:
   one:
     Title: Form One
     ListID: '76ac48ccc2'
+    FieldsToShow: 'FNAME,LNAME'
+    InterestCategoriesToShow: '67ad0c82cc,eec095e60d,f47c2daaf7'
 MailChimpTestPage:
   one:
     Title: Page One
