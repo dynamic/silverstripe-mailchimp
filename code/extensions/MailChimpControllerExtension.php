@@ -22,7 +22,7 @@ class MailChimpControllerExtension extends Extension
      */
     public function McSubscribeForm()
     {
-        if ( ! $this->owner->data()->MailChimpFormID > 0 || ! MailChimpSubscriberForm::get()->byID($this->owner->data()->MailChimpFormID)) {
+        if (!$this->owner->data()->MailChimpFormID > 0 || !MailChimpSubscriberForm::get()->byID($this->owner->data()->MailChimpFormID)) {
             return false;
         }
         $listID = $this->owner->data()->MailChimpForm()->ListID;
