@@ -114,7 +114,7 @@ class MailChimpSubscriberForm extends DataObject implements PermissionProvider
                 $categoryOptions = [];
 
                 $pushCategoryOption = function ($category) use (&$categoryOptions) {
-                    if ($category->type != 'hidden') {
+                    if (($this->config()->get('allow_hidden_groups') == false && $category->type != 'hidden') || $this->config()->get('allow_hidden_groups') == true) {
                         $categoryOptions[$category->id] = $category->title;
                     }
                 };
@@ -278,14 +278,15 @@ class MailChimpSubscriberForm extends DataObject implements PermissionProvider
      */
     protected function getBuiltField($field, $isCategory = false)
     {
-        $fieldTypeMap = $this->config()->get('field_type_map');
-        if (array_key_exists($field->type, $fieldTypeMap)) {
+        $fieldTypeMap    = $this->config()->get('field_type_map');
+        $hiddenGroupType = $this->config()->get('hidden_group_field_type');
+        if (array_key_exists($field->type, $fieldTypeMap) || $field->type == 'hidden') {
             if (!$isCategory) {
                 $fieldType = $fieldTypeMap[$field->type];
                 $field     = $fieldType::create($field->tag)->setTitle($field->name);
             } else {
                 $interests = $this->getInterests($field->id);
-                $fieldType = $fieldTypeMap[$field->type];
+                $fieldType = ($field->type != 'hidden') ? $fieldTypeMap[$field->type] : $hiddenGroupType;
                 $field     = $fieldType::create("Category[{$field->id}]")->setTitle($field->title);
                 if ($field instanceof DropdownField) {
                     $field->setSource($this->getInterestArray($interests));

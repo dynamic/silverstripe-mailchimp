@@ -4,3 +4,6 @@ Name: silverstripe-mailchimp-config
 SiteTree:
   extensions:
     - MailChimpSubscriberDataExtension
+MailChimpSubscriberForm:
+  allow_hidden_groups: false
+  hidden_group_field_type: CheckboxsetField
