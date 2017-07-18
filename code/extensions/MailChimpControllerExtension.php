@@ -43,15 +43,17 @@ class MailChimpControllerExtension extends Extension
             $fieldsArr = array_merge($fieldsArr, $formData->getInterestCategoryFields());
         }
 
-        $fields   = new FieldList($fieldsArr);
-        $actions  = new FieldList(
-            new FormAction('McDoSubscribeForm', 'Send Now')
+        $fields   = FieldList::create($fieldsArr);
+        $actions  = FieldList::create(
+            FormAction::create('McDoSubscribeForm', 'Send Now')
         );
-        $required = new RequiredFields(
-            array('Email')
-        );
+        $required = RequiredFields::create([
+            'Email',
+        ]);
 
-        $form = new Form($this->owner, 'McSubscribeForm', $fields, $actions, $required);
+        $controller = ($this->owner) ? $this->owner : Controller::curr();
+
+        $form = new Form($controller, 'McSubscribeForm', $fields, $actions, $required);
 
         $this->owner->extend('updateMcSubscribeForm', $form);
 
