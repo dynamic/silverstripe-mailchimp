@@ -285,7 +285,17 @@ class MailChimpSubscriberForm extends DataObject implements PermissionProvider
                 $fieldType = $fieldTypeMap[$field->type];
                 $field     = $fieldType::create($field->tag)->setTitle($field->name);
             } else {
-                $interests = $this->getInterests($field->id);
+                $interests       = $this->getInterests($field->id);
+                $excludedOptions = $this->config()->get('exclude_group_options');
+                if ((array)$excludedOptions === $excludedOptions && !empty($excludedOptions)) {
+                    foreach ($interests->interests as $key => $interest) {
+                        if (is_object($interest) && property_exists($interest, 'id')) {
+                            if (in_array($interest->id, $excludedOptions)) {
+                                unset($interests->interests[$key]);
+                            }
+                        }
+                    }
+                }
                 $fieldType = ($field->type != 'hidden') ? $fieldTypeMap[$field->type] : $hiddenGroupType;
                 $field     = $fieldType::create("Category[{$field->id}]")->setTitle($field->title);
                 if ($field instanceof DropdownField) {
